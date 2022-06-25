@@ -1,3 +1,3 @@
-import BasicContent from './IntroContent'
+import BasicContent from './BasicContent'
 
 export { BasicContent }

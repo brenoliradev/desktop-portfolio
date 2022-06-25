@@ -7,14 +7,22 @@ const Index = () => {
     <Main
       meta={
         <Meta
-          title="My Portfolio"
-          description="A Frontend portfolio using Parallax effect."
+          title="Breno Lira - Frontend"
+          description="Breno Lira portfolio using Parallax effect."
         />
       }
     >
       <div className="container flex h-screen w-screen items-center justify-center">
         <SnapshotCard
-          content={<BasicContent message={`Hello, I'm Breno.`} />}
+          content={
+            <BasicContent
+              message={`Hello, I'm Breno.`}
+              commentMessage={[
+                'A Frontend Developer',
+                'React.JS, Next.JS and TypeScript'
+              ]}
+            />
+          }
         />
       </div>
     </Main>

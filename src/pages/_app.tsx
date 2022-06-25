@@ -2,6 +2,7 @@ import '@fontsource/nunito-sans/600.css'
 import '@fontsource/nunito-sans/700.css'
 import '@fontsource/nunito-sans/800.css'
 import '../styles/global.css'
+import '../styles/keyframes.css'
 import '../styles/typography.css'
 
 import { AppProps } from 'next/app'
