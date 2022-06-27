@@ -58,7 +58,7 @@ const Index = () => {
             />
           </SnapshotCard>
           <SnapshotCard
-            className="relative right-12 top-8 z-20 hidden md:flex"
+            className="relative right-12 top-10 z-20 hidden md:flex"
             desirableWidth="15vw"
             minWidth="200px"
             maxWidth="500px"
