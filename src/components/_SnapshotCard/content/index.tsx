@@ -1,3 +1,4 @@
 import BasicContent from './BasicContent'
+import SocialContent from './SocialContent'
 
-export { BasicContent }
+export { BasicContent, SocialContent }

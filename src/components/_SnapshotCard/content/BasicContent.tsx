@@ -22,17 +22,17 @@ const BasicContent = ({
           &#124;
         </span>
       </p>
-      {commentMessage && Array.isArray(commentMessage) ? (
-        commentMessage!.map((item: string, i: number) => (
-          <p key={i} className="text-primary opacity-50">
-            &#60;&#45;&#45; {item} &#45;&#45;&#62;
-          </p>
-        ))
-      ) : (
-        <p className="text-primary opacity-50">
-          &#60;&#45;&#45; {commentMessage} &#45;&#45;&#62;
-        </p>
-      )}
+      {commentMessage && Array.isArray(commentMessage)
+        ? commentMessage!.map((item: string, i: number) => (
+            <p key={i} className="text-primary opacity-50">
+              &#60;&#45;&#45; {item} &#45;&#45;&#62;
+            </p>
+          ))
+        : commentMessage && (
+            <p className="text-primary opacity-50">
+              &#60;&#45;&#45; {commentMessage} &#45;&#45;&#62;
+            </p>
+          )}
     </div>
   )
 }
