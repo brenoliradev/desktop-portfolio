@@ -1,14 +1,29 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 import { BasicContent, SnapshotCard } from '@/components'
 import { SocialContent } from '@/components/_SnapshotCard/content'
+import { useStack } from '@/hooks'
 import { Meta } from '@/layouts'
 import { Main } from '@/templates'
 
 const Index = () => {
   const constraintsRef = useRef(null)
+  const { addPriority, stackOrder } = useStack()
+
+  const findPriority = useCallback(
+    (id: number, defaultPriority: number) => {
+      const myItem = stackOrder.find((item) => item.id === id)
+
+      return myItem?.priority || defaultPriority
+    },
+    [stackOrder]
+  )
+
+  useEffect(() => {
+    console.log('my stack order -> ', stackOrder)
+  }, [stackOrder])
 
   return (
     <Main
@@ -23,7 +38,13 @@ const Index = () => {
         ref={constraintsRef}
         className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden"
       >
-        <SnapshotCard className="absolute top-24" dragRef={constraintsRef}>
+        <SnapshotCard
+          className="absolute top-24"
+          dragRef={constraintsRef}
+          cardId={1}
+          cardPriority={findPriority(1, 1)}
+          handlePriority={addPriority}
+        >
           <BasicContent
             message={`Hello, I'm Breno.`}
             commentMessage={[
@@ -40,6 +61,9 @@ const Index = () => {
             minWidth="200px"
             maxWidth="500px"
             dragRef={constraintsRef}
+            handlePriority={addPriority}
+            cardId={2}
+            cardPriority={findPriority(2, 1)}
           >
             <div className="mx-auto pt-8">
               <Image
@@ -50,7 +74,13 @@ const Index = () => {
               />
             </div>
           </SnapshotCard>
-          <SnapshotCard dragRef={constraintsRef} className="z-10 shadow-2xl">
+          <SnapshotCard
+            dragRef={constraintsRef}
+            className="shadow-2xl"
+            handlePriority={addPriority}
+            cardId={3}
+            cardPriority={findPriority(3, 2)}
+          >
             <SocialContent
               message={`const { github, linkedin } = useInfo()`}
               commentMessage={[
@@ -66,11 +96,14 @@ const Index = () => {
             />
           </SnapshotCard>
           <SnapshotCard
-            className="relative right-12 top-10 z-20 hidden md:flex"
+            className="relative right-12 top-10 hidden md:flex"
             desirableWidth="15vw"
             minWidth="400px"
             maxWidth="500px"
             dragRef={constraintsRef}
+            handlePriority={addPriority}
+            cardId={4}
+            cardPriority={findPriority(4, 3)}
           >
             <span>
               <BasicContent

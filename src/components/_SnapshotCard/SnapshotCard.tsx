@@ -14,6 +14,9 @@ interface SnapshotProps {
   children?: ReactElement
   className?: string
   dragRef: MutableRefObject<null>
+  handlePriority(id: number): void
+  cardId: number
+  cardPriority: number
 }
 
 const SnapshotCard = ({
@@ -22,7 +25,10 @@ const SnapshotCard = ({
   maxWidth = '600px',
   children = <></>,
   className = '',
-  dragRef
+  dragRef,
+  handlePriority,
+  cardId,
+  cardPriority
 }: SnapshotProps) => {
   const [visibility, setVisibility] = useState<boolean>(true)
   const [render, setRender] = useState<boolean>(true)
@@ -44,7 +50,8 @@ const SnapshotCard = ({
     <motion.div
       style={{
         width: `clamp(${minWidth}, ${desirableWidth}, ${maxWidth})`,
-        animation: `${visibility ? 'fadeIn' : 'fadeOut'} .3s`
+        animation: `${visibility ? 'fadeIn' : 'fadeOut'} .3s`,
+        zIndex: `${cardPriority * 10}`
       }}
       className={`flex h-[200px] flex-col rounded-md bg-secondary shadow-xl sm:h-[270px] cursor-grab ${
         render ? '' : 'hidden md:hidden'
@@ -52,6 +59,7 @@ const SnapshotCard = ({
       drag
       dragMomentum={false}
       dragConstraints={dragRef}
+      onDragStart={() => handlePriority(cardId)}
     >
       <div className="flex h-9 w-full items-center gap-1.5 rounded-t-md bg-[#ccc]/5 px-4">
         <div
