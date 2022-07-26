@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from 'react'
 
 import { BasicContent, SnapshotCard } from '@/components'
 import { SocialContent } from '@/components/_SnapshotCard/content'
+import { HookExample } from '@/components/_SnapshotCard/group'
 import { useStack } from '@/hooks'
 import { Meta } from '@/layouts'
 import { Main } from '@/templates'
@@ -105,38 +106,7 @@ const Index = () => {
             cardId={4}
             cardPriority={findPriority(4, 3)}
           >
-            <span>
-              <BasicContent
-                message="const useInfo = () => {"
-                animate={false}
-                textSize="text-sm"
-              />
-              <BasicContent
-                className="pl-4"
-                message="const github = GIT_URL + lirbre"
-                animate={false}
-                textSize="text-sm"
-              />
-              <BasicContent
-                className="pl-4"
-                message="const linkedin = IN_URL + lirbre"
-                animate={false}
-                textSize="text-sm"
-              />
-              <BasicContent
-                className="pl-4 pt-4"
-                message="return { github, linkedin }"
-                animate={false}
-                textSize="text-sm"
-              />
-              <BasicContent message="}" animate={false} textSize="text-sm" />
-              <BasicContent
-                className="pt-4"
-                message="export { useInfo }"
-                animate={false}
-                textSize="text-sm"
-              />
-            </span>
+            <HookExample />
           </SnapshotCard>
         </div>
       </motion.div>

@@ -30,6 +30,7 @@ const useStack = () => {
       }
 
       copyItem.priority = 1
+
       return copyItem
     })
 
