@@ -23,7 +23,7 @@ const Index = () => {
         ref={constraintsRef}
         className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden"
       >
-        <SnapshotCard dragRef={constraintsRef}>
+        <SnapshotCard className="absolute top-24" dragRef={constraintsRef}>
           <BasicContent
             message={`Hello, I'm Breno.`}
             commentMessage={[
@@ -33,7 +33,7 @@ const Index = () => {
           />
         </SnapshotCard>
 
-        <div className="flex">
+        <div className="absolute bottom-24 flex">
           <SnapshotCard
             className="relative left-12 top-10 hidden md:flex"
             desirableWidth="15vw"
@@ -68,11 +68,42 @@ const Index = () => {
           <SnapshotCard
             className="relative right-12 top-10 z-20 hidden md:flex"
             desirableWidth="15vw"
-            minWidth="200px"
+            minWidth="400px"
             maxWidth="500px"
             dragRef={constraintsRef}
           >
-            <BasicContent message="export { useInfo }" />
+            <span>
+              <BasicContent
+                message="const useInfo = () => {"
+                animate={false}
+                textSize="text-sm"
+              />
+              <BasicContent
+                className="pl-4"
+                message="const github = GIT_URL + lirbre"
+                animate={false}
+                textSize="text-sm"
+              />
+              <BasicContent
+                className="pl-4"
+                message="const linkedin = IN_URL + lirbre"
+                animate={false}
+                textSize="text-sm"
+              />
+              <BasicContent
+                className="pl-4 pt-4"
+                message="return { github, linkedin }"
+                animate={false}
+                textSize="text-sm"
+              />
+              <BasicContent message="}" animate={false} textSize="text-sm" />
+              <BasicContent
+                className="pt-4"
+                message="export { useInfo }"
+                animate={false}
+                textSize="text-sm"
+              />
+            </span>
           </SnapshotCard>
         </div>
       </motion.div>
