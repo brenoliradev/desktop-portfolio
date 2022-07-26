@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useRef } from 'react'
 
 import { BasicContent, SnapshotCard } from '@/components'
 import { SocialContent } from '@/components/_SnapshotCard/content'
@@ -6,6 +8,8 @@ import { Meta } from '@/layouts'
 import { Main } from '@/templates'
 
 const Index = () => {
+  const constraintsRef = useRef(null)
+
   return (
     <Main
       meta={
@@ -15,8 +19,11 @@ const Index = () => {
         />
       }
     >
-      <div className="container flex h-screen w-screen flex-col items-center justify-center gap-4">
-        <SnapshotCard>
+      <motion.div
+        ref={constraintsRef}
+        className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden"
+      >
+        <SnapshotCard dragRef={constraintsRef}>
           <BasicContent
             message={`Hello, I'm Breno.`}
             commentMessage={[
@@ -32,6 +39,7 @@ const Index = () => {
             desirableWidth="15vw"
             minWidth="200px"
             maxWidth="500px"
+            dragRef={constraintsRef}
           >
             <div className="mx-auto pt-8">
               <Image
@@ -42,7 +50,7 @@ const Index = () => {
               />
             </div>
           </SnapshotCard>
-          <SnapshotCard className="z-10 shadow-2xl">
+          <SnapshotCard dragRef={constraintsRef} className="z-10 shadow-2xl">
             <SocialContent
               message={`const { github, linkedin } = useInfo()`}
               commentMessage={[
@@ -62,11 +70,12 @@ const Index = () => {
             desirableWidth="15vw"
             minWidth="200px"
             maxWidth="500px"
+            dragRef={constraintsRef}
           >
             <BasicContent message="export { useInfo }" />
           </SnapshotCard>
         </div>
-      </div>
+      </motion.div>
     </Main>
   )
 }
