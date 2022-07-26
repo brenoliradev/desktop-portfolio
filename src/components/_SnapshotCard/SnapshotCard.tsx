@@ -17,6 +17,7 @@ interface SnapshotProps {
   handlePriority(id: number): void
   cardId: number
   cardPriority: number
+  isOpen?: boolean
 }
 
 const SnapshotCard = ({
@@ -28,9 +29,10 @@ const SnapshotCard = ({
   dragRef,
   handlePriority,
   cardId,
-  cardPriority
+  cardPriority,
+  isOpen = true
 }: SnapshotProps) => {
-  const [visibility, setVisibility] = useState<boolean>(true)
+  const [visibility, setVisibility] = useState<boolean>(isOpen)
   const [render, setRender] = useState<boolean>(true)
 
   const close = useCallback(() => setVisibility(false), [visibility])

@@ -1,3 +1,4 @@
+import { HookCard } from './HookCard'
 import { HookExample } from './HookExample'
 
-export { HookExample }
+export { HookCard, HookExample }
