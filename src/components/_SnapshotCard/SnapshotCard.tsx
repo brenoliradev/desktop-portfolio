@@ -1,11 +1,5 @@
 import { motion } from 'framer-motion'
-import {
-  MutableRefObject,
-  ReactElement,
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import { MutableRefObject, ReactElement, useEffect, useState } from 'react'
 
 interface SnapshotProps {
   minWidth?: string
@@ -18,6 +12,7 @@ interface SnapshotProps {
   cardId: number
   cardPriority: number
   isOpen?: boolean
+  close: (id: number) => void
 }
 
 const SnapshotCard = ({
@@ -30,29 +25,27 @@ const SnapshotCard = ({
   handlePriority,
   cardId,
   cardPriority,
-  isOpen = true
+  isOpen = true,
+  close
 }: SnapshotProps) => {
-  const [visibility, setVisibility] = useState<boolean>(isOpen)
   const [render, setRender] = useState<boolean>(true)
-
-  const close = useCallback(() => setVisibility(false), [visibility])
 
   useEffect(() => {
     // timer to ensure the animation end
-    if (visibility) return
+    if (isOpen) return
 
     const myTimeout = setTimeout(() => setRender(false), 300)
 
     // make it clear itself when desconstruct
     /* eslint-disable consistent-return */
     return () => clearTimeout(myTimeout)
-  }, [visibility])
+  }, [isOpen])
 
   return (
     <motion.div
       style={{
         width: `clamp(${minWidth}, ${desirableWidth}, ${maxWidth})`,
-        animation: `${visibility ? 'fadeIn' : 'fadeOut'} .3s`,
+        animation: `${isOpen ? 'fadeIn' : 'fadeOut'} .3s`,
         zIndex: `${cardPriority * 10}`
       }}
       className={`flex h-[200px] flex-col rounded-md bg-secondary shadow-xl sm:h-[270px] cursor-grab ${
@@ -65,7 +58,7 @@ const SnapshotCard = ({
     >
       <div className="flex h-9 w-full items-center gap-1.5 rounded-t-md bg-[#ccc]/5 px-4">
         <div
-          onClick={close}
+          onClick={() => close(cardId)}
           className="h-3.5 w-3.5 cursor-pointer rounded-full bg-[#E7503B]"
         ></div>
         <div className="h-3.5 w-3.5 rounded-full bg-[#ECBB38]"></div>

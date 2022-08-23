@@ -27,9 +27,17 @@ const Index = () => {
     setIsOpen([...isOpen, { id, open: true }])
   }
 
+  const close = (id: number) => {
+    const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
+    const copy = [...isOpen].slice(sliceIndex, 1)
+
+    console.log(copy, sliceIndex)
+
+    setIsOpen(copy)
+  }
+
   useEffect(() => {
     console.log('my open tabs -> ', isOpen)
-    console.log()
   }, [isOpen])
 
   return (
@@ -57,6 +65,7 @@ const Index = () => {
           cardId={1}
           cardPriority={findPriority(1, 1)}
           handlePriority={addPriority}
+          close={close}
         >
           <span>
             <BasicContent
@@ -91,6 +100,7 @@ const Index = () => {
             addPriority={addPriority}
             constraintsRef={constraintsRef}
             findPriority={findPriority}
+            close={close}
           />
         </div>
       </motion.div>

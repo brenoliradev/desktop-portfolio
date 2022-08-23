@@ -8,12 +8,14 @@ interface HookCardProps {
   constraintsRef: MutableRefObject<null>
   addPriority: (id: number) => void
   findPriority: (id: number, defaultPriority: number) => number
+  close: (id: number) => void
 }
 
 export const HookCard = ({
   constraintsRef,
   addPriority,
-  findPriority
+  findPriority,
+  close
 }: HookCardProps) => {
   return (
     <>
@@ -23,6 +25,7 @@ export const HookCard = ({
         handlePriority={addPriority}
         cardId={3}
         cardPriority={findPriority(3, 2)}
+        close={close}
       >
         <SocialContent
           message={`const { github, linkedin } = useInfo()`}
@@ -47,6 +50,7 @@ export const HookCard = ({
         handlePriority={addPriority}
         cardId={4}
         cardPriority={findPriority(4, 3)}
+        close={close}
       >
         <HookExample />
       </SnapshotCard>
