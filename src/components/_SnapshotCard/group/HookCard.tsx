@@ -23,8 +23,8 @@ export const HookCard = ({
         dragRef={constraintsRef}
         className="shadow-2xl"
         handlePriority={addPriority}
-        cardId={3}
-        cardPriority={findPriority(3, 2)}
+        cardId={2}
+        cardPriority={findPriority(2, 2)}
         close={close}
       >
         <SocialContent
@@ -48,8 +48,8 @@ export const HookCard = ({
         maxWidth="500px"
         dragRef={constraintsRef}
         handlePriority={addPriority}
-        cardId={4}
-        cardPriority={findPriority(4, 3)}
+        cardId={3}
+        cardPriority={findPriority(3, 3)}
         close={close}
       >
         <HookExample />

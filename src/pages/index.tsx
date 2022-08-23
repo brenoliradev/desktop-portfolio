@@ -12,7 +12,11 @@ import { Main } from '@/templates'
 const Index = () => {
   const constraintsRef = useRef(null)
   const { addPriority, stackOrder } = useStack()
-  const [isOpen, setIsOpen] = useState<any>([])
+  const [isOpen, setIsOpen] = useState<any>([
+    { id: 1, open: true },
+    { id: 2, open: true },
+    { id: 3, open: true }
+  ])
 
   const findPriority = useCallback(
     (id: number, defaultPriority: number) => {
@@ -24,20 +28,28 @@ const Index = () => {
   )
 
   const open = (id: number) => {
+    const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
+    if (sliceIndex !== -1) {
+      const copy = [...isOpen]
+      copy[sliceIndex].open = true
+      setIsOpen(copy)
+      return
+    }
+
     setIsOpen([...isOpen, { id, open: true }])
   }
 
   const close = (id: number) => {
     const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
-    const copy = [...isOpen].slice(sliceIndex, 1)
+    const copy = [...isOpen]
 
-    console.log(copy, sliceIndex)
+    copy[sliceIndex].open = false
 
     setIsOpen(copy)
   }
 
   useEffect(() => {
-    console.log('my open tabs -> ', isOpen)
+    console.log('my tabs -> ', isOpen)
   }, [isOpen])
 
   return (
@@ -66,6 +78,7 @@ const Index = () => {
           cardPriority={findPriority(1, 1)}
           handlePriority={addPriority}
           close={close}
+          isOpen={isOpen[0].open}
         >
           <span>
             <BasicContent
