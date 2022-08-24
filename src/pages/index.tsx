@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
+import { MdPermContactCalendar } from 'react-icons/md'
 
 import { BasicContent, SnapshotCard } from '@/components'
 import { HookCard } from '@/components/_SnapshotCard/group'
@@ -48,10 +49,6 @@ const Index = () => {
     setIsOpen(copy)
   }
 
-  useEffect(() => {
-    console.log('my tabs -> ', isOpen)
-  }, [isOpen])
-
   return (
     <Main
       meta={
@@ -66,6 +63,15 @@ const Index = () => {
         className="absolute top-4 left-4 cursor-pointer rounded-md bg-secondary p-1.5 drop-shadow-sm"
       >
         <CgProfile color="#f2f2f2" size={64} />
+      </div>
+      <div
+        onClick={() => {
+          open(2)
+          open(3)
+        }}
+        className="absolute bottom-4 right-4 cursor-pointer rounded-md bg-secondary p-1.5 drop-shadow-sm"
+      >
+        <MdPermContactCalendar color="#f2f2f2" size={64} />
       </div>
       <motion.div
         ref={constraintsRef}
@@ -100,8 +106,8 @@ const Index = () => {
         >
           <Image
             src={'/assets/images/icon/react-icon.svg'}
-            width={98}
-            height={98}
+            width={76}
+            height={76}
             alt="react icon"
             className="cursor-grab"
             draggable={false}
@@ -114,6 +120,9 @@ const Index = () => {
             constraintsRef={constraintsRef}
             findPriority={findPriority}
             close={close}
+            isOpen={isOpen[1].open}
+            isExpanded={isOpen[2].open}
+            open={open}
           />
         </div>
       </motion.div>
