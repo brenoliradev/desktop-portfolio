@@ -67,7 +67,6 @@ const Index = () => {
       <div
         onClick={() => {
           open(2)
-          open(3)
         }}
         className="absolute bottom-4 right-4 cursor-pointer rounded-md bg-secondary p-1.5 drop-shadow-sm"
       >
