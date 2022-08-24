@@ -14,9 +14,9 @@ const Index = () => {
   const constraintsRef = useRef(null)
   const { addPriority, stackOrder } = useStack()
   const [isOpen, setIsOpen] = useState<any>([
-    { id: 1, open: true },
-    { id: 2, open: true },
-    { id: 3, open: true }
+    { id: 1, open: false },
+    { id: 2, open: false },
+    { id: 3, open: false }
   ])
 
   const findPriority = useCallback(
