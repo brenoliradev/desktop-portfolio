@@ -28,7 +28,7 @@ const SnapshotCard = ({
   isOpen = true,
   close
 }: SnapshotProps) => {
-  const [render, setRender] = useState<boolean>(true)
+  const [render, setRender] = useState<boolean>(isOpen)
 
   useEffect(() => {
     // timer to ensure the animation end
