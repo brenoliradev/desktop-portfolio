@@ -39,7 +39,5 @@ module.exports = {
       primary: 'var(--text-primary)',
       secondary: 'var(--text-secondary)'
     }
-  },
-
-  plugins: []
+  }
 }
