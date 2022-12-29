@@ -3,7 +3,10 @@ module.exports = {
     container: false
   },
   darkMode: 'class',
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
+  ],
   theme: {
     fontFamily: {
       nunito: 'Nunito Sans'
@@ -19,18 +22,6 @@ module.exports = {
       '3xl': 'var(--step-5)', // h4
       '4xl': 'var(--step-6)' // h4
     },
-    extend: {
-      colors: {
-        gray: {
-          100: 'var(--gray-100)',
-          200: 'var(--gray-200)',
-          300: 'var(--gray-300)',
-          400: 'var(--gray-400)'
-        },
-        blue: 'var(--blue)',
-        red: 'var(--red)'
-      }
-    },
     backgroundColor: {
       primary: 'var(--bg-primary)',
       secondary: 'var(--bg-secondary)'
@@ -39,5 +30,7 @@ module.exports = {
       primary: 'var(--text-primary)',
       secondary: 'var(--text-secondary)'
     }
-  }
+  },
+  // eslint-disable-next-line global-require
+  plugins: [require('flowbite/plugin')]
 }

@@ -6,6 +6,7 @@ import { MdPermContactCalendar } from 'react-icons/md'
 
 import { BasicContent, SnapshotCard } from '@/components'
 import { HookCard } from '@/components/_SnapshotCard/group'
+import { IconWithTooltip } from '@/components/IconWithTooltip'
 import { useStack } from '@/hooks'
 import { Meta } from '@/layouts'
 import { Main } from '@/templates'
@@ -58,20 +59,16 @@ const Index = () => {
         />
       }
     >
-      <div
-        onClick={() => open(1)}
-        className="absolute top-4 left-4 cursor-pointer rounded-md bg-secondary p-1.5 drop-shadow-sm"
-      >
-        <CgProfile color="#f2f2f2" size={64} />
-      </div>
-      <div
-        onClick={() => {
-          open(2)
-        }}
-        className="absolute bottom-4 right-4 cursor-pointer rounded-md bg-secondary p-1.5 drop-shadow-sm"
-      >
-        <MdPermContactCalendar color="#f2f2f2" size={64} />
-      </div>
+      <IconWithTooltip
+        content="Click to open an profile tab"
+        className="top-4 left-4"
+        icon={<CgProfile color="#f2f2f2" size={64} />}
+      />
+      <IconWithTooltip
+        content="Click to open an profile tab"
+        className="bottom-4 right-4"
+        icon={<MdPermContactCalendar color="#f2f2f2" size={64} />}
+      />
       <motion.div
         ref={constraintsRef}
         className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden"
