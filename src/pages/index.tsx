@@ -1,24 +1,25 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { MdPermContactCalendar } from 'react-icons/md'
 
 import { BasicContent, SnapshotCard } from '@/components'
 import { HookCard } from '@/components/_SnapshotCard/group'
 import { IconWithTooltip } from '@/components/IconWithTooltip'
+import { ToastComponent } from '@/components/Toast'
 import { useStack } from '@/hooks'
 import { Meta } from '@/layouts'
+import { useTabsStore } from '@/stores/tabs-store'
 import { Main } from '@/templates'
 
 const Index = () => {
   const constraintsRef = useRef(null)
   const { addPriority, stackOrder } = useStack()
-  const [isOpen, setIsOpen] = useState<any>([
-    { id: 1, open: false },
-    { id: 2, open: false },
-    { id: 3, open: false }
-  ])
+
+  const closeTab = useTabsStore((state) => state.closeTab)
+  const openTab = useTabsStore((state) => state.openTab)
+  const isOpen = useTabsStore((state) => state.isOpen)
 
   const findPriority = useCallback(
     (id: number, defaultPriority: number) => {
@@ -28,27 +29,6 @@ const Index = () => {
     },
     [stackOrder]
   )
-
-  const open = (id: number) => {
-    const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
-    if (sliceIndex !== -1) {
-      const copy = [...isOpen]
-      copy[sliceIndex].open = true
-      setIsOpen(copy)
-      return
-    }
-
-    setIsOpen([...isOpen, { id, open: true }])
-  }
-
-  const close = (id: number) => {
-    const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
-    const copy = [...isOpen]
-
-    copy[sliceIndex].open = false
-
-    setIsOpen(copy)
-  }
 
   return (
     <Main
@@ -60,14 +40,16 @@ const Index = () => {
       }
     >
       <IconWithTooltip
-        content="Click to open an profile tab"
+        content="Click to open a brief introduction tab!"
         className="top-4 left-4"
         icon={<CgProfile color="#f2f2f2" size={64} />}
+        tabId={1}
       />
       <IconWithTooltip
-        content="Click to open an profile tab"
+        content="Click to open a social tab!"
         className="bottom-4 right-4"
         icon={<MdPermContactCalendar color="#f2f2f2" size={64} />}
+        tabId={2}
       />
       <motion.div
         ref={constraintsRef}
@@ -79,7 +61,7 @@ const Index = () => {
           cardId={1}
           cardPriority={findPriority(1, 1)}
           handlePriority={addPriority}
-          close={close}
+          close={closeTab}
           isOpen={isOpen[0].open}
         >
           <span>
@@ -115,13 +97,14 @@ const Index = () => {
             addPriority={addPriority}
             constraintsRef={constraintsRef}
             findPriority={findPriority}
-            close={close}
+            close={closeTab}
             isOpen={isOpen[1].open}
             isExpanded={isOpen[2].open}
-            open={open}
+            open={openTab}
           />
         </div>
       </motion.div>
+      <ToastComponent />
     </Main>
   )
 }

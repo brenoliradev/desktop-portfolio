@@ -1,0 +1,39 @@
+import create from 'zustand'
+
+type UseTabsStoreType = {
+  isOpen: any
+  openTab: (id: number) => void
+  closeTab: (id: number) => void
+}
+
+export const useTabsStore = create<UseTabsStoreType>()((set, get) => ({
+  isOpen: [
+    { id: 1, open: false },
+    { id: 2, open: false },
+    { id: 3, open: false }
+  ],
+  openTab: (id: number) => {
+    const { isOpen } = get()
+
+    const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
+    if (sliceIndex !== -1) {
+      const copy = [...isOpen]
+      copy[sliceIndex].open = true
+
+      set(() => ({ isOpen: copy }))
+      return
+    }
+
+    set(() => ({ isOpen: [...isOpen, { id, open: true }] }))
+  },
+  closeTab: (id: number) => {
+    const { isOpen } = get()
+
+    const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
+    const copy = [...isOpen]
+
+    copy[sliceIndex].open = false
+
+    set(() => ({ isOpen: copy }))
+  }
+}))
