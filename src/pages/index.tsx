@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { MdPermContactCalendar } from 'react-icons/md'
 
@@ -8,22 +8,11 @@ import { BasicContent, SnapshotCard } from '@/components'
 import { HookCard } from '@/components/_SnapshotCard/group'
 import { IconWithTooltip } from '@/components/IconWithTooltip'
 import { ToastComponent } from '@/components/Toast'
-import { useStack } from '@/hooks'
 import { Meta } from '@/layouts'
 import { Main } from '@/templates'
 
 const Index = () => {
   const constraintsRef = useRef(null)
-  const { addPriority, stackOrder } = useStack()
-
-  const findPriority = useCallback(
-    (id: number, defaultPriority: number) => {
-      const myItem = stackOrder.find((item) => item.id === id)
-
-      return myItem?.priority || defaultPriority
-    },
-    [stackOrder]
-  )
 
   return (
     <Main
@@ -54,8 +43,6 @@ const Index = () => {
           className="absolute top-24 left-32"
           dragRef={constraintsRef}
           cardId={1}
-          cardPriority={findPriority(1, 1)}
-          handlePriority={addPriority}
         >
           <span>
             <BasicContent
@@ -85,11 +72,7 @@ const Index = () => {
           />
         </motion.div>
 
-        <HookCard
-          addPriority={addPriority}
-          constraintsRef={constraintsRef}
-          findPriority={findPriority}
-        />
+        <HookCard constraintsRef={constraintsRef} />
       </motion.div>
       <ToastComponent />
     </Main>

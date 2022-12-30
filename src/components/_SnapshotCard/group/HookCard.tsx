@@ -8,15 +8,9 @@ import { HookExample } from './HookExample'
 
 interface HookCardProps {
   constraintsRef: MutableRefObject<null>
-  addPriority: (id: number) => void
-  findPriority: (id: number, defaultPriority: number) => number
 }
 
-export const HookCard = ({
-  constraintsRef,
-  addPriority,
-  findPriority
-}: HookCardProps) => {
+export const HookCard = ({ constraintsRef }: HookCardProps) => {
   const openTab = useTabsStore((state) => state.openTab)
 
   return (
@@ -24,9 +18,7 @@ export const HookCard = ({
       <SnapshotCard
         dragRef={constraintsRef}
         className="absolute bottom-32 right-24 shadow-md"
-        handlePriority={addPriority}
         cardId={2}
-        cardPriority={findPriority(2, 2)}
       >
         <>
           <SocialContent
@@ -57,9 +49,7 @@ export const HookCard = ({
         minWidth="400px"
         maxWidth="500px"
         dragRef={constraintsRef}
-        handlePriority={addPriority}
         cardId={3}
-        cardPriority={findPriority(3, 3)}
       >
         <HookExample />
       </SnapshotCard>

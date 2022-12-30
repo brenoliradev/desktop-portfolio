@@ -7,6 +7,7 @@ import {
   useState
 } from 'react'
 
+import { useStackOrderStore } from '@/stores/stackorder-store'
 import { useTabsStore } from '@/stores/tabs-store'
 
 interface SnapshotProps {
@@ -16,9 +17,7 @@ interface SnapshotProps {
   children?: ReactElement
   className?: string
   dragRef: MutableRefObject<null>
-  handlePriority(id: number): void
   cardId: number
-  cardPriority: number
 }
 
 const SnapshotCard = ({
@@ -28,12 +27,12 @@ const SnapshotCard = ({
   children = <></>,
   className = '',
   dragRef,
-  handlePriority,
-  cardId,
-  cardPriority
+  cardId
 }: SnapshotProps) => {
   const closeTab = useTabsStore((state) => state.closeTab)
   const isOpen = useTabsStore((state) => state.isOpen)
+  const addPriority = useStackOrderStore((state) => state.addPriority)
+  const stackOrder = useStackOrderStore((state) => state.stackOrder)
 
   const [render, setRender] = useState<boolean>(isOpen[cardId - 1]?.open!)
 
@@ -58,13 +57,13 @@ const SnapshotCard = ({
           style={{
             width: `clamp(${minWidth}, ${desirableWidth}, ${maxWidth})`,
             animation: `${isOpen ? 'fadeIn' : 'fadeOut'} .3s`,
-            zIndex: `${cardPriority * 10}`
+            zIndex: `${stackOrder[memoCardId - 1]!.priority * 10}`
           }}
           className={`flex h-[200px] flex-col rounded-md bg-secondary shadow-xl sm:h-[270px] cursor-grab ${className}`}
           drag
           dragMomentum={false}
           dragConstraints={dragRef}
-          onDragStart={() => handlePriority(cardId)}
+          onDragStart={() => addPriority(cardId)}
         >
           <div className="flex h-9 w-full items-center gap-1.5 rounded-t-md bg-[#ccc]/5 px-4">
             <div
