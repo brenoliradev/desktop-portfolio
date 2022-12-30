@@ -20,10 +20,10 @@ export const HookCard = ({
   const openTab = useTabsStore((state) => state.openTab)
 
   return (
-    <div className="relative flex">
+    <>
       <SnapshotCard
         dragRef={constraintsRef}
-        className="relative shadow-md"
+        className="absolute bottom-32 right-24 shadow-md"
         handlePriority={addPriority}
         cardId={2}
         cardPriority={findPriority(2, 2)}
@@ -52,7 +52,7 @@ export const HookCard = ({
         </>
       </SnapshotCard>
       <SnapshotCard
-        className="relative right-12 top-10 hidden md:flex"
+        className="absolute right-36 top-10 hidden md:flex"
         desirableWidth="15vw"
         minWidth="400px"
         maxWidth="500px"
@@ -63,6 +63,6 @@ export const HookCard = ({
       >
         <HookExample />
       </SnapshotCard>
-    </div>
+    </>
   )
 }

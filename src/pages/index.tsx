@@ -51,7 +51,7 @@ const Index = () => {
         className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden"
       >
         <SnapshotCard
-          className="absolute top-24"
+          className="absolute top-24 left-32"
           dragRef={constraintsRef}
           cardId={1}
           cardPriority={findPriority(1, 1)}
@@ -73,7 +73,7 @@ const Index = () => {
         <motion.div
           drag
           dragConstraints={constraintsRef}
-          className="backdrop mx-auto flex cursor-grab items-center justify-center rounded-full bg-secondary p-2 drop-shadow-md"
+          className="backdrop absolute mx-auto flex cursor-grab items-center justify-center rounded-full bg-secondary p-2 drop-shadow-md"
         >
           <Image
             src={'/assets/images/icon/react-icon.svg'}
@@ -85,13 +85,11 @@ const Index = () => {
           />
         </motion.div>
 
-        <div className="absolute bottom-24 flex">
-          <HookCard
-            addPriority={addPriority}
-            constraintsRef={constraintsRef}
-            findPriority={findPriority}
-          />
-        </div>
+        <HookCard
+          addPriority={addPriority}
+          constraintsRef={constraintsRef}
+          findPriority={findPriority}
+        />
       </motion.div>
       <ToastComponent />
     </Main>
