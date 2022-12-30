@@ -27,7 +27,7 @@ export const HookCard = ({
     <>
       <SnapshotCard
         dragRef={constraintsRef}
-        className="relative shadow-2xl"
+        className="relative shadow-md"
         handlePriority={addPriority}
         cardId={2}
         cardPriority={findPriority(2, 2)}
