@@ -10,16 +10,11 @@ import { IconWithTooltip } from '@/components/IconWithTooltip'
 import { ToastComponent } from '@/components/Toast'
 import { useStack } from '@/hooks'
 import { Meta } from '@/layouts'
-import { useTabsStore } from '@/stores/tabs-store'
 import { Main } from '@/templates'
 
 const Index = () => {
   const constraintsRef = useRef(null)
   const { addPriority, stackOrder } = useStack()
-
-  const closeTab = useTabsStore((state) => state.closeTab)
-  const openTab = useTabsStore((state) => state.openTab)
-  const isOpen = useTabsStore((state) => state.isOpen)
 
   const findPriority = useCallback(
     (id: number, defaultPriority: number) => {
@@ -61,8 +56,6 @@ const Index = () => {
           cardId={1}
           cardPriority={findPriority(1, 1)}
           handlePriority={addPriority}
-          close={closeTab}
-          isOpen={isOpen[0].open}
         >
           <span>
             <BasicContent
@@ -97,10 +90,6 @@ const Index = () => {
             addPriority={addPriority}
             constraintsRef={constraintsRef}
             findPriority={findPriority}
-            close={closeTab}
-            isOpen={isOpen[1].open}
-            isExpanded={isOpen[2].open}
-            open={openTab}
           />
         </div>
       </motion.div>

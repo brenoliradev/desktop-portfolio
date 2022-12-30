@@ -1,5 +1,7 @@
 import { MutableRefObject } from 'react'
 
+import { useTabsStore } from '@/stores/tabs-store'
+
 import { BasicContent, SocialContent } from '../content'
 import SnapshotCard from '../SnapshotCard'
 import { HookExample } from './HookExample'
@@ -8,31 +10,23 @@ interface HookCardProps {
   constraintsRef: MutableRefObject<null>
   addPriority: (id: number) => void
   findPriority: (id: number, defaultPriority: number) => number
-  close: (id: number) => void
-  isOpen: boolean
-  isExpanded: boolean
-  open: (id: number) => void
 }
 
 export const HookCard = ({
   constraintsRef,
   addPriority,
-  findPriority,
-  close,
-  isExpanded,
-  isOpen,
-  open
+  findPriority
 }: HookCardProps) => {
+  const openTab = useTabsStore((state) => state.openTab)
+
   return (
-    <>
+    <div className="relative flex">
       <SnapshotCard
         dragRef={constraintsRef}
         className="relative shadow-md"
         handlePriority={addPriority}
         cardId={2}
         cardPriority={findPriority(2, 2)}
-        close={close}
-        isOpen={isOpen}
       >
         <>
           <SocialContent
@@ -48,7 +42,7 @@ export const HookCard = ({
               }
             ]}
           />
-          <div onClick={() => open(3)}>
+          <div onClick={() => openTab(3)}>
             <BasicContent
               message={`getInfo()`}
               animate={false}
@@ -66,11 +60,9 @@ export const HookCard = ({
         handlePriority={addPriority}
         cardId={3}
         cardPriority={findPriority(3, 3)}
-        close={close}
-        isOpen={isExpanded}
       >
         <HookExample />
       </SnapshotCard>
-    </>
+    </div>
   )
 }

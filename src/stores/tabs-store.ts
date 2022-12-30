@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 type UseTabsStoreType = {
-  isOpen: any
+  isOpen: { id: number; open: boolean }[]
   openTab: (id: number) => void
   closeTab: (id: number) => void
 }
@@ -18,7 +18,7 @@ export const useTabsStore = create<UseTabsStoreType>()((set, get) => ({
     const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
     if (sliceIndex !== -1) {
       const copy = [...isOpen]
-      copy[sliceIndex].open = true
+      copy[sliceIndex]!.open = true
 
       set(() => ({ isOpen: copy }))
       return
@@ -32,7 +32,7 @@ export const useTabsStore = create<UseTabsStoreType>()((set, get) => ({
     const sliceIndex = isOpen.findIndex((item: any) => item.id === id)
     const copy = [...isOpen]
 
-    copy[sliceIndex].open = false
+    copy[sliceIndex]!.open = false
 
     set(() => ({ isOpen: copy }))
   }

@@ -1,5 +1,13 @@
 import { motion } from 'framer-motion'
-import { MutableRefObject, ReactElement, useEffect, useState } from 'react'
+import {
+  MutableRefObject,
+  ReactElement,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
+
+import { useTabsStore } from '@/stores/tabs-store'
 
 interface SnapshotProps {
   minWidth?: string
@@ -11,8 +19,6 @@ interface SnapshotProps {
   handlePriority(id: number): void
   cardId: number
   cardPriority: number
-  isOpen?: boolean | (() => boolean)
-  close: (id: number) => void
 }
 
 const SnapshotCard = ({
@@ -24,22 +30,26 @@ const SnapshotCard = ({
   dragRef,
   handlePriority,
   cardId,
-  cardPriority,
-  isOpen = true,
-  close
+  cardPriority
 }: SnapshotProps) => {
-  const [render, setRender] = useState<boolean>(isOpen)
+  const closeTab = useTabsStore((state) => state.closeTab)
+  const isOpen = useTabsStore((state) => state.isOpen)
+
+  const [render, setRender] = useState<boolean>(isOpen[cardId - 1]?.open!)
+
+  // hold reference for effect since i'm using zustand selector
+  const memoCardId = useMemo(() => cardId, [cardId])
 
   useEffect(() => {
     // timer to ensure the animation end
-    if (isOpen) return setRender(true)
+    if (isOpen[memoCardId - 1]?.open!) return setRender(true)
 
     const myTimeout = setTimeout(() => setRender(false), 300)
 
     // make it clear itself when desconstruct
     /* eslint-disable consistent-return */
     return () => clearTimeout(myTimeout)
-  }, [isOpen])
+  }, [isOpen, memoCardId])
 
   return (
     <>
@@ -58,7 +68,7 @@ const SnapshotCard = ({
         >
           <div className="flex h-9 w-full items-center gap-1.5 rounded-t-md bg-[#ccc]/5 px-4">
             <div
-              onClick={() => close(cardId)}
+              onClick={() => closeTab(cardId)}
               className="h-3.5 w-3.5 cursor-pointer rounded-full bg-[#E7503B]"
             ></div>
             <div className="h-3.5 w-3.5 rounded-full bg-[#ECBB38]"></div>
