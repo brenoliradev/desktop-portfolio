@@ -23,22 +23,22 @@ const Index = () => {
         />
       }
     >
-      <IconWithTooltip
-        content="Click to open a brief introduction tab!"
-        className="top-4 left-4"
-        icon={<CgProfile color="#f2f2f2" size={64} />}
-        tabId={1}
-      />
-      <IconWithTooltip
-        content="Click to open a social tab!"
-        className="bottom-4 right-4"
-        icon={<MdPermContactCalendar color="#f2f2f2" size={64} />}
-        tabId={2}
-      />
       <motion.div
         ref={constraintsRef}
         className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden"
       >
+        <IconWithTooltip
+          content="Click to open a brief introduction tab!"
+          className="top-4 left-4"
+          icon={<CgProfile color="#f2f2f2" size={64} />}
+          tabId={1}
+        />
+        <IconWithTooltip
+          content="Click to open a social tab!"
+          className="bottom-4 right-4"
+          icon={<MdPermContactCalendar color="#f2f2f2" size={64} />}
+          tabId={2}
+        />{' '}
         <SnapshotCard
           className="absolute top-24 left-32"
           dragRef={constraintsRef}
@@ -56,7 +56,6 @@ const Index = () => {
             <BasicContent className="pt-4" message={``} animate={true} />
           </span>
         </SnapshotCard>
-
         <motion.div
           drag
           dragConstraints={constraintsRef}
@@ -71,7 +70,6 @@ const Index = () => {
             draggable={false}
           />
         </motion.div>
-
         <HookCard constraintsRef={constraintsRef} />
       </motion.div>
       <ToastComponent />
