@@ -17,7 +17,7 @@ export const HookCard = ({ constraintsRef }: HookCardProps) => {
     <>
       <SnapshotCard
         dragRef={constraintsRef}
-        className="absolute bottom-32 right-24 shadow-md"
+        className="absolute bottom-32 shadow-md lg:right-24"
         cardId={2}
       >
         <>
@@ -31,6 +31,10 @@ export const HookCard = ({ constraintsRef }: HookCardProps) => {
               {
                 link: 'https://github.com/lirbre',
                 name: 'onClick() => github()'
+              },
+              {
+                link: 'https://drive.google.com/drive/folders/1f2k0LmXC_D9KkbbW5JGd0PV6DB7Qgbg-?usp=sharing',
+                name: 'onClick() => curriculum()'
               }
             ]}
           />

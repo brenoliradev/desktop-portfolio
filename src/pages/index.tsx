@@ -40,7 +40,7 @@ const Index = () => {
           tabId={2}
         />{' '}
         <SnapshotCard
-          className="absolute top-24 left-32"
+          className="absolute top-24 lg:left-32"
           dragRef={constraintsRef}
           cardId={1}
         >
