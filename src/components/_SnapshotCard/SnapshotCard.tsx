@@ -66,10 +66,10 @@ const SnapshotCard = ({
           onDragStart={() => addPriority(cardId)}
         >
           <div className="flex h-9 w-full items-center gap-1.5 rounded-t-md bg-[#ccc]/5 px-4">
-            <div
+            <button
               onClick={() => closeTab(cardId)}
               className="h-3.5 w-3.5 cursor-pointer rounded-full bg-[#E7503B]"
-            ></div>
+            ></button>
             <div className="h-3.5 w-3.5 rounded-full bg-[#ECBB38]"></div>
             <div className="h-3.5 w-3.5 rounded-full bg-[#6FD5A8]"></div>
           </div>

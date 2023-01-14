@@ -17,19 +17,21 @@ export const IconWithTooltip = ({
   const openTab = useTabsStore((state) => state.openTab)
 
   return (
-    <div
-      className={`absolute cursor-pointer ${className}`}
-      onClick={() => openTab(tabId)}
-    >
-      <Tooltip
-        content={content}
-        placement="bottom"
-        className="color-primary w-60 bg-secondary text-center"
+    <>
+      <button
+        className={`absolute cursor-pointer ${className}`}
+        onClick={() => openTab(tabId)}
       >
-        <div className="rounded-md bg-secondary p-1.5 drop-shadow-sm">
-          {icon}
-        </div>
-      </Tooltip>
-    </div>
+        <Tooltip
+          content={content}
+          placement="bottom"
+          className="color-primary w-60 bg-secondary text-center"
+        >
+          <div className="rounded-md bg-secondary p-1.5 drop-shadow-sm">
+            {icon}
+          </div>
+        </Tooltip>
+      </button>
+    </>
   )
 }
