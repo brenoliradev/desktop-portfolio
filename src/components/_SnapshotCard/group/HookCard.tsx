@@ -25,11 +25,11 @@ export const HookCard = ({ constraintsRef }: HookCardProps) => {
             message={`const { github, linkedin, getInfo } = useInfo()`}
             commentMessage={[
               {
-                link: 'https://www.linkedin.com/in/lirbre/',
+                link: 'https://www.linkedin.com/in/brenoliradev/',
                 name: 'onClick() => linkedin()'
               },
               {
-                link: 'https://github.com/lirbre',
+                link: 'https://github.com/brenoliradev',
                 name: 'onClick() => github()'
               },
               {
