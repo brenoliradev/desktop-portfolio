@@ -10,7 +10,7 @@ export const useTabsStore = create<UseTabsStoreType>()((set, get) => ({
   isOpen: [
     { id: 1, open: true },
     { id: 2, open: true },
-    { id: 3, open: true }
+    { id: 3, open: false }
   ],
   openTab: (id: number) => {
     const { isOpen } = get()
