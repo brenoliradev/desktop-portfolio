@@ -7,7 +7,6 @@ import { MdPermContactCalendar } from 'react-icons/md'
 import { BasicContent, SnapshotCard } from '@/components'
 import { HookCard } from '@/components/_SnapshotCard/group'
 import { IconWithTooltip } from '@/components/IconWithTooltip'
-import { ToastComponent } from '@/components/Toast'
 import { Meta } from '@/layouts'
 import { Main } from '@/templates'
 
@@ -72,7 +71,6 @@ const Index = () => {
         </motion.div>
         <HookCard constraintsRef={constraintsRef} />
       </motion.div>
-      <ToastComponent />
     </Main>
   )
 }
